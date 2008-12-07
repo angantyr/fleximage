@@ -249,6 +249,14 @@ module Fleximage
           raise e
         end
       end
+
+      # Hack to assign the image by passing an RMagick image object
+      def rmagick_file=(file)
+        @uploaded_image = file
+        self.image_width = @uploaded_image.columns
+        self.image_height = @uploaded_image.rows
+        @invalid_image = false
+      end
       
       # Assign the image via a URL, which will make the plugin go
       # and fetch the image at the provided URL.  The image will be stored
