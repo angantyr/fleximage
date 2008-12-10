@@ -4,6 +4,16 @@ module Fleximage
   class View < ActionView::TemplateHandler #:nodoc:
     class TemplateDidNotReturnImage < RuntimeError #:nodoc:
     end
+
+    # fix for Rails 2.2.2 compile view error
+    def self.call(template)
+      "Fleximage::View.new(self).render(template)"
+    end
+
+    def initialize(action_view)
+      @view = action_view
+    end
+    # end fix
     
     def render(template)
       # process the view
